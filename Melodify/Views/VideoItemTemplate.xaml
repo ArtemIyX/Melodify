@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <DataTemplate x:Key="VideoItemTemplate">
+
+        <Grid Padding="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Column="0"
+                       Source="{Binding Thumbnail}"
+                       WidthRequest="90"
+                       HeightRequest="60"
+                       Aspect="AspectFill" />
+
+            <VerticalStackLayout Grid.Column="1"
+                                     Spacing="5"
+                                     Padding="5">
+                <Label Text="{Binding Title}"
+                           FontAttributes="Bold"
+                           LineBreakMode="TailTruncation" />
+                <Label Text="{Binding Channel}"
+                           FontSize="Small"
+                           TextColor="Gray" />
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="{Binding Views}"
+                               FontSize="Small" />
+                    <Label Text="{Binding Duration}"
+                               FontSize="Small" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

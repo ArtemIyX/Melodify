@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Melodify.ViewModels"
+             x:Class="Melodify.MainPage"
+             Unloaded="ContentPage_Unloaded">
+    <ContentPage.BindingContext>
+        <vm:MainViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid RowDefinitions="Auto, *"
+          Padding="20"
+          HorizontalOptions="FillAndExpand">
+        <!-- Top Row: Search Controls -->
+        <Grid Grid.Row="0"
+              ColumnDefinitions="*, Auto"
+              HorizontalOptions="FillAndExpand">
+            <Entry x:Name="VideoIdEntry"
+                   Placeholder="Search..."
+                   VerticalOptions="CenterAndExpand"
+                   Grid.Column="0" />
+            <Button Text="Search"
+                    Clicked="OnSearchClicked"
+                    VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="Center"
+                    Grid.Column="1"
+                    IsEnabled="{Binding IsSearchEnabled}"/>
+        </Grid>
+
+        <!-- Bottom Row: CollectionView and WebView -->
+        <Border Grid.Row="1"
+                Stroke="Black" 
+            StrokeThickness="1"
+            Padding="2"
+            Margin="0"
+            BackgroundColor="Transparent">
+
+            <CollectionView x:Name="VideoListView"
+                            VerticalScrollBarVisibility="Always"
+                            SelectionMode="Single"
+                            ItemsSource="{Binding SearchResults}"
+                            ItemTemplate="{StaticResource VideoItemTemplate}"
+                            RemainingItemsThreshold="2"
+                            RemainingItemsThresholdReached="VideoListView_RemainingItemsThresholdReached">
+            </CollectionView>
+        </Border>
+
+        <WebView x:Name="VideoWebView"
+                 Grid.Row="1"
+                 IsVisible="False"
+                 VerticalOptions="Start"
+                 HorizontalOptions="Start"
+                 Source="https://www.youtube.com/"/>
+    </Grid>
+
+</ContentPage>
